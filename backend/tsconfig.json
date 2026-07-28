@@ -1,14 +1,19 @@
-// {
-//   "compilerOptions": {
-//     "target": "esnext",
-//     "module": "nodenext",
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
 
-//     // все дальше настройки для удобства
-//     "rewriteRelativeImportExtensions": true,
-//     "erasableSyntaxOnly": true,
-//     "verbatimModuleSyntax": true,
-//     "noEmit": true,
-//     "strict": true,
-//     "skipLibCheck": true
-//   }
-// }
+    // все дальше настройки для удобства
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+
+
+    // вроде указываю а ругается, пусть полежит в false
+    "verbatimModuleSyntax": false,
+
+
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+  }
+}
