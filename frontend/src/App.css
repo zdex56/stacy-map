@@ -1,28 +1,92 @@
-.red
+*, *::before, *::after {
+  box-sizing: border-box;
+} 
+/* кое кто сказал так круто делайте так, поверим ему */
+body
 {
-  color: red;
+background-color: #264653;
+font-family: sans-serif;
+color: #e9c46a;
+margin: 0;
 }
-.meow
+
+
+/*главный див*/
+.hero {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.main
 {
-  color: blue;
+  padding: 20px;
 }
-.red.meow
+
+
+
+header 
 {
-  color: pink
+  display: grid;
+  align-items: center;
+  height: 60px;
+  margin: 20px 20px 0 20px;
+  border:#f4a261 3px solid;
+  border-radius: 8px;
+  background-color: #24a9bb1e
 }
+
+
+header h1
+{
+  margin: 0;
+  border: none;
+
+}
+
+footer {
+
+
+  height: 45px;
+  box-sizing: border-box;
+  margin: 20px;
+
+  font-size: 14px;
+  border-radius: 8px;
+  background-color: #24a9bb1e;
+  border:#f4a261 3px solid;
+}
+
+footer h1
+{
+  padding-top: 5px;
+  border: none;
+  text-align: center;
+  margin: 0;
+}
+
+
+
+
+
 
 h1
 {
-  border:rgb(97, 133, 56) 3px solid;
+  border:#f4a261 3px solid;
 }
 
-body
-{
-background-image: url("./public/background.jpg");
-background-position: center center;
-background-repeat: no-repeat;
-background-size: cover;
-background-attachment: fixed;
 
+button
+{
+  margin: 10px;
+  padding: 10px;
+  background-color: #e76f51;
+  border: none;
+  border-radius: 5px;
+
+  color: #e9c46a;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 1px #da4a26ab
 }
 
