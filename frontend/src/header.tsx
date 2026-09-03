@@ -13,6 +13,7 @@ function Header()
     return(
         <header>
                 <Link to={'/'} className="Link_button">пользователи</Link>
+                <Link to={'/map'} className="Link_button">карты</Link>
                 {isactive !=='logged' &&
                     (
                         <div className="div_profile">

@@ -6,6 +6,7 @@ import TestComp from './components/TestComp'
 import RegComp from './components/RegComp'
 import LoginComp from './components/LoginComp'
 import ProfileComp from './components/ProfileComp'
+import MapComp from './components/MapComp'
 
 import type {LayoutProps} from '../interface/test';
 
@@ -50,9 +51,12 @@ function App() {
           <MainLayout>
             <ProfileComp/>
           </MainLayout>
-        }
-        
-        />
+        }/>
+        <Route path='map' element={
+          <MainLayout>
+            <MapComp/>
+          </MainLayout>
+        }/>
 
         
     </Routes>
