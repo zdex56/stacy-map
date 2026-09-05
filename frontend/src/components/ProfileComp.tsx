@@ -1,10 +1,11 @@
 import { BaseContext } from '../../context/BaseContext';
 import { useContext, useState } from 'react';
-
+import { URL } from '../../config';
 
 // const response = await fetch(`${URL}/users/myname`,
 // {headers:{'Authorization': 'Bearer ' + localStorage.getItem('token')}})
 // const data = await response.json() на будущее
+
 
 
 function ProfileComp() {
@@ -13,9 +14,9 @@ const {name} = useContext(BaseContext)
 
 function GetName()
 {
-    console.log('имя',name)
     Setmyname(name)
 }
+
 
 
     return(

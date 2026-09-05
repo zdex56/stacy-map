@@ -7,6 +7,7 @@ import { hash } from 'node:crypto';
 import jwt ,{ JsonWebTokenError, Jwt } from 'jsonwebtoken';
 import strict from "node:assert/strict";
 import UserMiddleware from "../middleware/UserMiddleware";
+import { request } from "node:https";
 const router = Router();
 
 // bcrypt просто потому что уже работал с ним мне привычно
@@ -78,6 +79,7 @@ router.post('/registration', async (req:Request, res:Response) =>
 }
 )
 
+
 router.post('/login',async(req:Request,res:Response) =>
   {
   const {username,pass} = req.body;
@@ -145,9 +147,64 @@ router.get('/myname',UserMiddleware,async (req:Request,res:Response)=>
   }
 
 }
-
 )
 
-
+router.get('/usertask',UserMiddleware, async (req:Request,res:Response)=>
+{
+try
+{
+  let result = await pool.query
+  ('select points.point_id, points.lat,points.lng,description from points join userpoints on points.point_id  = userpoints.point_id  where userpoints.user_id=$1',[req.user.user_id])
+  
+  
+  
+  res.status(200).json({result:result.rows})
+}
+catch(err)
+{
+  console.log(err)
+  console.log('писька')
+  res.status(500).json({message:'ошибка при попытке получить задачи'})
+}
+})
 
 export default router;
+
+
+router.delete('/delPoint',UserMiddleware, async(req:Request,res:Response)=>
+{
+  try
+  {
+    let point_id = req.body.Point_id
+    let result1 = await pool.query
+    ('DELETE FROM userpoints WHERE point_id = $1',[point_id]) 
+    let result2 = await pool.query
+    ('DELETE FROM points WHERE point_id = $1',[point_id])
+res.status(200).json({ message: 'ok' })
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
+}
+)
+
+router.post('/addPoint',UserMiddleware,async(req:Request,res:Response) =>
+{
+try
+{
+let {lat,lng} = req.body
+let pointResult = await pool.query
+('insert into points values (default,null,$1,$2) returning point_id',[lat,lng])
+let point_id = await pointResult.rows[0].point_id
+let userpoinsRetult = await pool.query
+('insert into userpoints values ($1,$2)',[req.user.user_id,point_id])
+
+res.status(200).json({message:'получилось'})
+}
+catch(err)
+{
+console.log(err)
+} 
+}
+)

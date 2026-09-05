@@ -14,13 +14,14 @@ function logout()
     localStorage.clear()
     setIsactive('out')
     setName('')
-
 }
 
 function logginpress()
 {
 setName(localStorage.getItem('name'))
 }
+
+
 
 
 

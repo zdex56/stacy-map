@@ -206,5 +206,44 @@ min-height: 100%;
 justify-items: left;
 align-items:center;
 padding-left:25px ;
+grid-template-columns: 66% 34%;
 }
-#map { height: 600px;width: 600px; border:#f4a261 10px solid; border-radius: 4px;}
+#map { height: 600px;width: 80%; border:#f4a261 10px solid; border-radius: 4px;}
+
+
+
+
+
+.li_points {
+  position: relative;
+  overflow: hidden;
+
+  cursor: pointer;
+  background: #032f53;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.h2_dropdown {
+
+  padding: 0px 10px;
+  margin: 0;
+  
+  /* Начальное (скрытое) состояние */
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-20px);
+  background: #264653;
+  
+
+  transition: all 0.4s ease; 
+}
+
+/* Класс, который мы будем добавлять при клике */
+.h2_dropdown.open {
+  max-height: 150px; /* Должно быть больше, чем реальная высота контента */
+  opacity: 1;
+  transform: translateY(0);
+  background: #032f53;
+  padding: 10px;
+}

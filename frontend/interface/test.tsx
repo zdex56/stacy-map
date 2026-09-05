@@ -20,3 +20,10 @@ export interface LayoutProps
   children: ReactNode;
 }
 
+export interface Points
+{
+  point_id:number;
+  lat:number;
+  lng:number;
+  description:Text;
+}
