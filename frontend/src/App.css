@@ -1,3 +1,7 @@
+/* * {
+    outline: 1px solid red;
+} */
+
 
 body
 {
@@ -229,7 +233,7 @@ grid-template-columns: 66% 34%;
   padding: 0px 10px;
   margin: 0;
   
-  /* Начальное (скрытое) состояние */
+  /* скрытое состояние запомни*/
   max-height: 0;
   opacity: 0;
   transform: translateY(-20px);
@@ -239,11 +243,41 @@ grid-template-columns: 66% 34%;
   transition: all 0.4s ease; 
 }
 
-/* Класс, который мы будем добавлять при клике */
+
 .h2_dropdown.open {
-  max-height: 150px; /* Должно быть больше, чем реальная высота контента */
+  max-height: 150px; 
   opacity: 1;
   transform: translateY(0);
   background: #032f53;
+  padding: 10px;
+  padding-bottom: 5px;
+}
+
+.input_desc
+{
+  display: grid;
+  background-color: #14354b;
+  border: #264653;
+  border-radius: 7px;
+
+  color: white;
+  max-width: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-20px);
+
+  background: #264653;
+  transition: all 0.4s ease; 
+}
+
+.input_desc.open{
+  max-height: 150px; 
+  width: 90%;
+  max-width: 100%;
+  opacity: 1;
+  transform: translateY(0);
+  background: #14354b;
+  margin-left: 10px;
+  margin-bottom: 10px;
   padding: 10px;
 }

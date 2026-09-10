@@ -180,7 +180,7 @@ router.delete('/delPoint',UserMiddleware, async(req:Request,res:Response)=>
     ('DELETE FROM userpoints WHERE point_id = $1',[point_id]) 
     let result2 = await pool.query
     ('DELETE FROM points WHERE point_id = $1',[point_id])
-res.status(200).json({ message: 'ok' })
+  res.status(200).json({ message: 'ok' })
   }
   catch(err)
   {
@@ -207,4 +207,20 @@ catch(err)
 console.log(err)
 } 
 }
+)
+
+router.post('/description',async(req:Request,res:Response) =>
+{
+  try 
+  {
+    let description = req.body.description
+    let point_id = req.body.point_id
+    const result = pool.query
+    ('update points set description = $1 where point_id = $2',[description,point_id])
+    res.status(200).json({message:'изменено описание'})
+  }
+  catch(err)
+  {console.log(err)}
+}
+
 )
