@@ -8,7 +8,7 @@
     function LoginComp()
     {
     const navigate = useNavigate();
-    const {setIsactive,logginpress}  = useContext(BaseContext)
+    const {logginpress,setName,setUsername,setDescription}  = useContext(BaseContext)
     const [formdata,setFormdata] = useState({pass:'',username:''})
     const [result,setResult] = useState('')
     
@@ -34,10 +34,17 @@
             setResult(data.mess)
             return
         }
+
         setResult(data.mess)
+        console.log(data)
+
+            localStorage.setItem('icon',data.icon)
+        
         localStorage.setItem('token',data.token)
-        localStorage.setItem('name',data.name)
-        setIsactive('logged')
+        localStorage.setItem('name', data.name)
+        localStorage.setItem('username', data.username)
+        localStorage.setItem('description', data.description)
+
         logginpress()
         setResult('успешно!')
         setTimeout(() => {navigate('/')},2000)

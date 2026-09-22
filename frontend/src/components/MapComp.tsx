@@ -152,6 +152,8 @@ let searchControl = new (GeoSearchControl as any)({
 })
 map.addControl(searchControl)
 
+
+
     map.on('moveend', () => {
         const center = map.getCenter();
         localStorage.setItem('mapcoord', JSON.stringify({

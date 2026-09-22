@@ -1,0 +1,110 @@
+
+/* * {
+    outline: 1px solid red;
+} */
+.profile{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin: 40px;
+
+}
+
+
+.profile_change{
+    box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: solid 2px crimson;
+    background-color: #202020;
+    margin: 30px;
+    padding: 30px;
+    position: relative;
+    display: grid;
+    grid-template-rows: 10%;
+
+}
+
+
+
+.input_EditFiels
+{
+    padding-left: 5px;
+    text-align: left;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    color: white;
+    border: #202020;
+    background: #424242;
+    outline: 0;
+    box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button_EditFiels,.username
+{
+    padding-left: 5px;
+    text-align:left;
+    border-radius: 5px;
+ 
+    
+    color: white;
+    border: 0;
+    box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
+    background: #424242;
+    font-weight: 300;
+}
+
+.username
+{
+cursor: not-allowed;
+color: gray;
+}
+
+.content_button
+{
+    width: 100px;
+    height: 40px;
+    margin-left: 20px;
+}
+.description    
+{
+    width: 300px;
+    height: 100px;
+}
+
+.button_EditFiels, .input_EditFiels, .username, .hover_label{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.profile_header
+{
+    border-bottom: #464646 2px solid;
+    gap: 30px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, max-content); 
+
+}
+
+.content_profile
+{
+    padding-top: 10px;
+    display: grid;
+
+}
+
+
+.hover_label
+{
+display: flex;
+cursor: pointer;
+align-items: center;
+justify-content: center;
+padding: 0;
+margin: 0;
+font-weight: 300;
+font-size: 13px;
+font-family: Arial, Helvetica, sans-serif;
+}

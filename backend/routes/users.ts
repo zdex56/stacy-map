@@ -87,7 +87,7 @@ router.post('/login',async(req:Request,res:Response) =>
   {
   // AWAIT НЕ ЗАБЫВАЙ  AWAIT НЕ ЗАБЫВАЙ AWAIT НЕ ЗАБЫВАЙ AWAIT AWAIT НЕ ЗАБЫВАЙ 
   const result = await pool.query
-  ('select name,password,user_id from users where username = $1',[username])
+  ('select name,description,username,password,user_id,icon from users where username = $1',[username])
 
   if (result.rows.length === 0)
   {
@@ -113,7 +113,8 @@ router.post('/login',async(req:Request,res:Response) =>
     }
     
   )
-  res.status(200).json({mess:"успешно",token:token,name:result.rows[0].name})
+  res.status(200).json({mess:"успешно",token:token,name:result.rows[0].name,
+    username:result.rows[0].username,description:result.rows[0].description,icon:result.rows[0].icon})
 
   }
   catch(err)
@@ -221,6 +222,35 @@ router.post('/description',async(req:Request,res:Response) =>
   }
   catch(err)
   {console.log(err)}
+}
+
+)
+
+router.post('/change',UserMiddleware,async(req:Request,res:Response) =>
+{
+  try
+  {
+let update = req.body.update
+let newValue = req.body.newValue
+let user_id = req.user.user_id
+let allowed = ['name','description','username'];
+console.log(update,newValue,user_id)
+if(!allowed.includes(update))
+{
+  res.status(400)
+  return
+}
+console.log(update,newValue,user_id)
+    const result =await pool.query
+    (`update users set ${update} = $1 where user_id = $2 returning ${update}`,[newValue,user_id])
+    console.log(result.rows[0])
+    res.status(200).json({newValue:result.rows[0][update]})
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
+
 }
 
 )

@@ -8,9 +8,15 @@ import LoginComp from './components/LoginComp'
 import ProfileComp from './components/ProfileComp'
 import MapComp from './components/MapComp'
 
+
+
+import { useContext} from "react";
+import { BaseContext } from "../context/BaseContext";
+
+
 import type {LayoutProps} from '../interface/test';
 
-import { Routes,Route } from 'react-router-dom';
+import { Routes,Route,Navigate,BrowserRouter } from 'react-router-dom';
 
 
 
@@ -27,9 +33,22 @@ function MainLayout({children}:LayoutProps)
 }
 
 
+function ProtectedRoute({children}:{children: React.ReactNode})
+{
+
+    const {isactive} = useContext(BaseContext)   
+    if (isactive === 'out')
+    {
+        return <Navigate to="/login" replace />;
+    }
+
+    return <>{children}</>;
+}
+
 
 function App() {
   return (
+
     <Routes>
         <Route path="/" element={
             <MainLayout>
@@ -47,19 +66,22 @@ function App() {
         <Route path='/login' element={
           <LoginComp/>
         }/>
-        <Route path='profile' element={
+        <Route path='/profile' element={
+                <ProtectedRoute>
           <MainLayout>
             <ProfileComp/>
           </MainLayout>
+                    </ProtectedRoute>
         }/>
-        <Route path='map' element={
-          <MainLayout>
+        <Route path='/map' element={
+          <ProtectedRoute>
+            <MainLayout>
             <MapComp/>
-          </MainLayout>
+            </MainLayout>
+          </ProtectedRoute>
         }/>
-
-        
     </Routes>
+
 
   )
 }
