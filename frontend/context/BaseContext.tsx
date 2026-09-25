@@ -1,16 +1,51 @@
-import { createContext,useState} from "react";
-
+import { createContext,useEffect,useState} from "react";
+import { jwtDecode } from 'jwt-decode';
 export const BaseContext = createContext(null as any)
 
 export const BaseProvider = ({children}:any) =>
 {
-console.log('перезаписал даныне снова')
 const [icon, setIcon] = useState(localStorage.getItem('icon'))
 const [isactive,setIsactive] = useState<'logged' | 'out'>(() => localStorage.getItem('token') ? "logged" : "out")
 const [name,setName] = useState(localStorage.getItem('name'))
 const [username,setUsername] = useState(localStorage.getItem('username'))
 const [description,setDescription] = useState(localStorage.getItem('description'))
 
+
+function useTokenValidator(onExpire: () => void)
+{
+    useEffect(()=>
+    {
+        const checkToken = () =>
+        {
+        type expjtw = {exp:number}
+        let token = localStorage.getItem('token')
+        if (!token) return
+        
+        try
+        {
+            let {exp} = jwtDecode<expjtw>(token)
+          if (Date.now() > exp * 1000)
+            {
+                onExpire()
+            }
+
+        }
+        catch(err)
+        {
+            console.log(err)
+            onExpire()
+        }
+        }
+
+
+        checkToken()
+        let interval = setInterval(checkToken,30_000) //30sek
+
+        return () => clearInterval(interval)
+    },[onExpire])
+}
+
+useTokenValidator(()=>setIsactive('out'))
 
 function logout()
 {   

@@ -1,5 +1,5 @@
 import { BaseContext } from '../../context/BaseContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, type ReactHTMLElement } from 'react';
 import { URL } from '../../config';
 import ProfilePattern from '../pattern/ProfilePattern';
 import React from 'react';
@@ -38,6 +38,7 @@ function EditFiels({value,placeholder,onsave,name,update}:{value:string,placehol
 const [isedit,setIsedit] = useState(false)
 const [cher,setchern] = useState(value)
 
+
 const save = () =>
 {
 onsave(cher),
@@ -69,7 +70,10 @@ return (
 
 
 function ProfileComp() {
-const {setDescription,description,setUsername,username,setName,name,icon,setIcon} = useContext(BaseContext)
+const {setDescription,description,setUsername,username,setName,name,icon,setIcon,IsTokenValid} = useContext(BaseContext)
+const [modal,setModal] = useState(true)
+
+
 
 
 async function UploadAvatar(event:React.ChangeEvent<HTMLInputElement>) {
@@ -92,7 +96,66 @@ async function UploadAvatar(event:React.ChangeEvent<HTMLInputElement>) {
     localStorage.setItem('icon',data.iconid)
     
 }
-console.log("иконка "+icon)
+
+
+
+// добавить проверку на одинаковый пароль
+function ModalPass()
+{
+const [formdata,setFormdata] = useState({newpass:'',oldpass:''})
+const [message,setmessage] = useState('вы ничего не делали пока что')
+
+
+async function ActionChangePass() {
+if (formdata.oldpass === '' || formdata.newpass === '')
+{
+    setmessage('пустое поле')
+    return
+}
+
+if (formdata.oldpass === formdata.newpass)
+{   
+    setmessage('пароли одинаковые')
+    return
+}
+
+    console.log('отправляю'+formdata.oldpass,formdata.newpass)
+    let result = await fetch(`${URL}/users/change-password`,{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+localStorage.getItem('token'),
+            'Content-type':'application/json'
+        },
+        
+        body:JSON.stringify({oldpass:formdata.oldpass,newpass:formdata.newpass})
+    })
+   
+    let data = await result.json()
+    setmessage(data.message)
+     console.log(data)
+}
+
+
+function handlechange (e:React.ChangeEvent<HTMLInputElement>)
+{
+    setFormdata(a => ({...a, [e.target.name]:e.target.value}))
+}
+if(!modal) return null
+return(
+    <div className='modal_window'>
+        <div className='change_pass'>
+        <input  className='input_EditFiels' type="text" name="oldpass" value={formdata.oldpass} onChange={(handlechange)} placeholder='текущий пароль'/>
+         <input  className='input_EditFiels' type="text" name="newpass" value={formdata.newpass} onChange={(handlechange)} placeholder='новый пароль'/>
+         <button className='button_EditFiels'  onClick={ActionChangePass}>сменить пароль</button>
+         <button className='button_EditFiels    ' onClick={()=>setModal(false)}>выйти</button>
+         <h2>{message}</h2>
+        </div>
+    </div>
+)
+}
+
+
+
+
 
 
     return(
@@ -109,17 +172,22 @@ console.log("иконка "+icon)
                     <div className='content_button'>
                         <button className='button_EditFiels username'>@{username}</button>
                     </div>
+
                     <div className='content_button'>
                         <label htmlFor="fileInput" className="button_EditFiels hover_label">сменить аву</label>
                         <input  id="fileInput" type="file" name="avatar" onChange={UploadAvatar} accept='image/*' hidden/>
                     </div>
-                    
+                    <div className='content_button' style={{width:'120px'}}  >
+                        <button onClick={()=>setModal(true)} className='button_EditFiels hover_label'>сменить пароль</button>
+                    </div>
                 </div>
-                
+               <ModalPass/>
                 <div className='content_profile '>
                     <div className='content_button description'>
                         <EditFiels update='description'value={description} placeholder={description} onsave={setDescription} name={description}/>
                     </div>
+
+                        
                 </div>
 
             </div>

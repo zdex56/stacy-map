@@ -4,7 +4,7 @@ import { BaseContext } from "../../context/BaseContext";
 
 
 
-function protectedRoute({children}:{children: React.ReactNode})
+function ProtectedRoute({children}:{children: React.ReactNode})
 
 {
     const {isactive} = useContext(BaseContext)   
@@ -18,4 +18,4 @@ function protectedRoute({children}:{children: React.ReactNode})
 }
 
 
-export default protectedRoute
+export default ProtectedRoute

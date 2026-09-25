@@ -57,9 +57,11 @@ router.post('/upload', UserMiddleware, upload.single('avatar'), async function (
     let files = fs.readdirSync(folder);
 
   
-    if (files.includes(`${old.rows[0].icon}`)) {
+    if (files.includes(`${old.rows[0].icon}`)) 
+    {
       let del = path.join(folder, `${old.rows[0].icon}`);
-      if (del = 'default.jpg')
+
+      if (old.rows[0].icon === 'default.jpg')
       {
         console.log('не буду удалять')
       }

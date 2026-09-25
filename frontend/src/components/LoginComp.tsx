@@ -2,7 +2,7 @@
     import { Link, Navigate, Route,useNavigate } from "react-router-dom";
     import { URL } from "../../config";
     import { BaseContext } from "../../context/BaseContext";
-    import { useContext } from "react";
+    import { useContext,useRef } from "react";
 
 
     function LoginComp()
@@ -11,7 +11,18 @@
     const {logginpress,setName,setUsername,setDescription}  = useContext(BaseContext)
     const [formdata,setFormdata] = useState({pass:'',username:''})
     const [result,setResult] = useState('')
+    const [loginsuc,setLoginsuc] = useState(false)
     
+
+        useEffect(()=>{
+            if (!loginsuc) return
+            let timer = setTimeout(() => {
+                navigate('/')
+            }, 2000);
+
+            return() =>{clearTimeout(timer)}
+        },[loginsuc])
+
     async function login() 
     {
         try
@@ -47,8 +58,7 @@
 
         logginpress()
         setResult('успешно!')
-        setTimeout(() => {navigate('/')},2000)
-        
+        setLoginsuc(true)
 
         }   
 catch (err) {
@@ -73,7 +83,7 @@ console.log(err)
         <div className='input_div'>
         <input  name ='username' value={formdata.username} onChange={handlechange}  placeholder = 'username'/>
         <input type='password' name='pass' value={formdata.pass} onChange={handlechange}  placeholder ='пароль'/>
-        <button disabled = {!formdata.pass||!formdata.username} onClick={login}>войти</button>
+        <button disabled = {!formdata.pass||!formdata.username}  onClick={login}>войти</button>
         <h2>{result}</h2>
         </div>
         </div>

@@ -80,11 +80,9 @@ if (flags === 'user')
     contentif =  <div>
         <ul>
           {users.map(as => 
-            <li key={as.user_id}>
-              <li>id - {as.user_id}</li>
-              <li>name - {as.name}</li>
-              <li>username - {as.username}</li>
-            </li>
+<li key={as.user_id}>
+  id - {as.user_id}, name - {as.name}, username - {as.username}
+</li>
             
           )}
         </ul>

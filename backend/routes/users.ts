@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { error } from 'node:console';
 import pool from '../db'
 import { json, Router, type Request, type Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt, { compare } from 'bcrypt';
 import { hash } from 'node:crypto';
 import jwt ,{ JsonWebTokenError, Jwt } from 'jsonwebtoken';
 import strict from "node:assert/strict";
@@ -251,6 +251,35 @@ console.log(update,newValue,user_id)
     console.log(err)
   }
 
+}
+)
+
+router.post('/change-password',UserMiddleware,async(req:Request,res:Response) =>
+{
+
+  try
+  {
+    {
+  let oldpass = req.body.oldpass
+  let newpass = req.body.newpass
+
+  let checkpass =  await pool.query('SELECT password from users where user_id = $1',[req.user.user_id])
+
+  let result = await bcrypt.compare(oldpass,checkpass.rows[0].password)
+
+  if (!result)
+  {
+    res.status(400).json({message:"не верный пароль"})
+    return
+  }
+
+  let hashed =await bcrypt.hash(newpass,10)
+  await pool.query('update users set password = $1 where user_id = $2',[hashed,req.user.user_id])
+  res.status(200).json({message:'успешно'})
+}
+}
+catch(err)
+{console.log(err)}
 }
 
 )

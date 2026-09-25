@@ -17,7 +17,6 @@ function UserMiddleware(req: Request, res: Response, next: NextFunction) {
             console.error(' ошибка верификации:', err.message); 
             return res.status(403).json({ message: 'ошибка middleware' });
         }
-        console.log("проверка пройдена")
         req.user = user as { user_id: number; name: string };
         next();
     });
