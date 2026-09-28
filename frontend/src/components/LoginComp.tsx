@@ -1,14 +1,14 @@
     import { useEffect, useState } from "react";
-    import { Link, Navigate, Route,useNavigate } from "react-router-dom";
+    import { Link,useNavigate } from "react-router-dom";
     import { URL } from "../../config";
     import { BaseContext } from "../../context/BaseContext";
-    import { useContext,useRef } from "react";
+    import { useContext } from "react";
 
 
     function LoginComp()
     {
     const navigate = useNavigate();
-    const {logginpress,setName,setUsername,setDescription}  = useContext(BaseContext)
+    const {logginpress}  = useContext(BaseContext)
     const [formdata,setFormdata] = useState({pass:'',username:''})
     const [result,setResult] = useState('')
     const [loginsuc,setLoginsuc] = useState(false)
@@ -47,7 +47,6 @@
         }
 
         setResult(data.mess)
-        console.log(data)
 
             localStorage.setItem('icon',data.icon)
         

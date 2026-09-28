@@ -16,7 +16,7 @@ import { BaseContext } from "../context/BaseContext";
 
 import type {LayoutProps} from '../interface/test';
 
-import { Routes,Route,Navigate,BrowserRouter } from 'react-router-dom';
+import { Routes,Route,Navigate } from 'react-router-dom';
 
 
 

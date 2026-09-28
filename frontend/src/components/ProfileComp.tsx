@@ -1,5 +1,5 @@
 import { BaseContext } from '../../context/BaseContext';
-import { useContext, useState, type ReactHTMLElement } from 'react';
+import { useContext, useState } from 'react';
 import { URL } from '../../config';
 import ProfilePattern from '../pattern/ProfilePattern';
 import React from 'react';
@@ -70,8 +70,8 @@ return (
 
 
 function ProfileComp() {
-const {setDescription,description,setUsername,username,setName,name,icon,setIcon,IsTokenValid} = useContext(BaseContext)
-const [modal,setModal] = useState(true)
+const {setDescription,description,username,setName,name,setIcon} = useContext(BaseContext)
+const [modal,setModal] = useState(false)
 
 
 
@@ -119,7 +119,6 @@ if (formdata.oldpass === formdata.newpass)
     return
 }
 
-    console.log('отправляю'+formdata.oldpass,formdata.newpass)
     let result = await fetch(`${URL}/users/change-password`,{
         method:'POST',
         headers:{'Authorization':'Bearer '+localStorage.getItem('token'),
@@ -131,7 +130,6 @@ if (formdata.oldpass === formdata.newpass)
    
     let data = await result.json()
     setmessage(data.message)
-     console.log(data)
 }
 
 
