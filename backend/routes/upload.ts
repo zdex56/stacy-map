@@ -61,11 +61,7 @@ router.post('/upload', UserMiddleware, upload.single('avatar'), async function (
     {
       let del = path.join(folder, `${old.rows[0].icon}`);
 
-      if (old.rows[0].icon === 'default.jpg')
-      {
-        console.log('не буду удалять')
-      }
-      else
+      if (old.rows[0].icon !== 'default.jpg')
       {
         fs.unlinkSync(del);
       }

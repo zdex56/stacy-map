@@ -164,7 +164,6 @@ try
 catch(err)
 {
   console.log(err)
-  console.log('писька')
   res.status(500).json({message:'ошибка при попытке получить задачи'})
 }
 })
@@ -234,16 +233,13 @@ let update = req.body.update
 let newValue = req.body.newValue
 let user_id = req.user.user_id
 let allowed = ['name','description','username'];
-console.log(update,newValue,user_id)
 if(!allowed.includes(update))
 {
   res.status(400)
   return
 }
-console.log(update,newValue,user_id)
     const result =await pool.query
     (`update users set ${update} = $1 where user_id = $2 returning ${update}`,[newValue,user_id])
-    console.log(result.rows[0])
     res.status(200).json({newValue:result.rows[0][update]})
   }
   catch(err)
