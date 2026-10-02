@@ -7,7 +7,7 @@ import pool from '../db';
 import express, {type Express,type Request,type Response,json, Router,NextFunction} from "express";
 import { time, timeStamp } from 'node:console';
 import UserMiddleware from '../middleware/UserMiddleware';
-const app : Express = express();
+
 
 
 

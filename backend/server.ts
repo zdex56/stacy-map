@@ -1,5 +1,7 @@
 import usersRoutes from './routes/users'
 import upload from './routes/upload'
+import friends from './routes/friends'
+
 import './routes/upload'
 import cors from 'cors'
 
@@ -14,7 +16,7 @@ const port = 3000;
 
 app.use('/users', usersRoutes);
 app.use('/upload',upload)
-
+app.use('/friends',friends)
 
 app.use('/icon', express.static('uploads'));
 

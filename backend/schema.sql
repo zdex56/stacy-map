@@ -27,7 +27,11 @@ CREATE TABLE IF NOT EXISTS friends (
     id           serial4 PRIMARY KEY,
     requester_id int4 REFERENCES users(user_id),
     addressee_id int4 REFERENCES users(user_id),
+
+
     status       text CHECK (status IN ('send', 'accepted', 'declined')),
+
+    
     CHECK (requester_id <> addressee_id),
     UNIQUE (requester_id, addressee_id)
 );
