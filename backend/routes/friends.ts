@@ -116,7 +116,7 @@ router.delete('/delete', UserMiddleware, async(req:Request,res:Response) =>
 
                 if (result.rowCount === 0)
                 {
-                    return res.status(400).json({'пользователи не найдены'})
+                    return res.status(400).json({message:'пользователи не найдены'})
                 }
             res.status(200).json({message:'успешно удалено'})
         }
@@ -140,7 +140,7 @@ router.post('/accept',UserMiddleware,async(req:Request,res:Response) =>
 
                 if (result.rowCount === 0)
                 {
-                    return res.status(400).json({'пользователи не найдены'})
+                    return res.status(400).json({message:'пользователи не найдены'})
                 }
 
         res.status(200).json({message:'теперь вы друзья :3'})
