@@ -84,7 +84,7 @@ color: gray;
     gap: 30px;
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(4, max-content); 
+  grid-template-columns: repeat(5, max-content); 
 
 }
 

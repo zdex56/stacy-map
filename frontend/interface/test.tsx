@@ -15,6 +15,15 @@ export interface User
 
 }
 
+export interface Friends_User
+{
+  request_id: number;
+  friend_id: number;
+  name:string;
+  username:string;
+  icon: string;
+}
+
 export interface LayoutProps
 {
   children: ReactNode;

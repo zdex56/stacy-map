@@ -1,7 +1,8 @@
 import { BaseContext } from '../../context/BaseContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { URL } from '../../config';
 import ProfilePattern from '../pattern/ProfilePattern';
+import {useNavigate} from 'react-router-dom'
 import React from 'react';
 import "./ProfileComp.css"
 
@@ -72,7 +73,7 @@ return (
 function ProfileComp() {
 const {setDescription,description,username,setName,name,setIcon} = useContext(BaseContext)
 const [modal,setModal] = useState(false)
-
+const navigate = useNavigate()
 
 
 
@@ -96,6 +97,7 @@ async function UploadAvatar(event:React.ChangeEvent<HTMLInputElement>) {
     localStorage.setItem('icon',data.iconid)
     
 }
+
 
 
 
@@ -177,6 +179,10 @@ return(
                     </div>
                     <div className='content_button' style={{width:'120px'}}  >
                         <button onClick={()=>setModal(true)} className='button_EditFiels hover_label'>сменить пароль</button>
+                    </div>
+                    <div className='content_button'>
+                        <button className='button_EditFiels' onClick={()=>navigate('/friends')}>друзыыья</button> 
+                        {/* а чё я курил? почему я нигде не сделал норм кнопки а Link делал? :/ */}
                     </div>
                 </div>
                <ModalPass/>

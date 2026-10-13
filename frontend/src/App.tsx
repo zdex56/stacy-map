@@ -7,7 +7,7 @@ import RegComp from './components/RegComp'
 import LoginComp from './components/LoginComp'
 import ProfileComp from './components/ProfileComp'
 import MapComp from './components/MapComp'
-
+import Friends from './components/Friends'
 
 
 import { useContext} from "react";
@@ -80,6 +80,14 @@ function App() {
             </MainLayout>
           </ProtectedRoute>
         }/>
+        <Route path='/friends' element={
+          <ProtectedRoute>
+            <MainLayout>
+            <Friends/>
+            </MainLayout>
+          </ProtectedRoute>
+        }/>
+        
     </Routes>
 
 
